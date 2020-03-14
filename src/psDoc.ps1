@@ -1,9 +1,17 @@
 param(
-    [parameter(Mandatory=$true, Position=0)] [string] $moduleName,
-    [parameter(Mandatory=$false, Position=1)] [string] $template = "./out-html-template.ps1",
-    [parameter(Mandatory=$false, Position=2)] [string] $outputDir = './help',
-    [parameter(Mandatory=$false, Position=3)] [string] $fileName = 'index.html'
+    [parameter(Mandatory=$true, Position=0)] 
+    [string] $moduleName,
+
+    [parameter(Mandatory=$false, Position=1)] 
+    [string] $template = "./out-html-template.ps1",
+
+    [parameter(Mandatory=$false, Position=2)] 
+    [string] $outputDir = './help',
+
+    [parameter(Mandatory=$false, Position=3)] 
+    [string] $fileName = 'index.html'
 )
+
 
 function FixString ($in = '', [bool]$includeBreaks = $false){
     if ($in -eq $null) { return }
@@ -16,9 +24,12 @@ function FixString ($in = '', [bool]$includeBreaks = $false){
     return $rtn
 }
 
+
 function Update-Progress($name, $action){
     Write-Progress -Activity "Rendering $action for $name" -CurrentOperation "Completed $progress of $totalCommands." -PercentComplete $(($progress/$totalCommands)*100)
 }
+
+
 $i = 0
 $commandsHelp = (Get-Command -module $moduleName) | get-help -full | Where-Object {! $_.name.EndsWith('.ps1')}
 

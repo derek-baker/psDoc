@@ -1,18 +1,20 @@
-psDoc is a Powershell Help Document generator.
+PSDoc is a Powershell Help Document generator.
 
 ----
-### Using psDoc ###
+### Using PSDoc ###
 
-To generate documentation off of your module, simply import your module
-
-```
-Import-Module MySpecialModule
-```
-
-And generate the documentation
+To generate documentation from a module, import the module and use this tool to generate the documentation.
 
 ```
-.\psDoc.ps1 -moduleName MySpecialModule
+Import-Module SomeModule
+Set-Location -Path .\src\
+
+# To generate HTML
+.\psdoc.ps1 -moduleName SomeModule
+
+# To generate Markdown
+.\psdoc.ps1 -moduleName SomeModule -template './out-markdown-template.ps1'
+
 ```
 
 ### License ###
